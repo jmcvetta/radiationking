@@ -9,8 +9,38 @@
     tools:context=".ConfigActivity" >
 
     <TextView
+        android:id="@+id/help_toggle_enabled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/help_enabled" />
+
+    <TextView
+        android:id="@+id/help_spinner_wakeup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toggle_enabled"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/help_spinner_wakeup" />
+
+    <ToggleButton
+        android:id="@+id/toggle_enabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/help_toggle_enabled"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textOff="@string/capital_disabled"
+        android:textOn="@string/capital_enabled" />
+
+    <Spinner
+        android:id="@+id/spinner_wakeup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/help_spinner_wakeup"
+        android:layout_below="@+id/help_spinner_wakeup"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>
