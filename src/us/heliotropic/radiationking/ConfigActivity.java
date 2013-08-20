@@ -1,10 +1,15 @@
 package us.heliotropic.radiationking;
 
-import java.util.TreeMap;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 
 public class ConfigActivity extends Activity {
 
@@ -13,7 +18,13 @@ public class ConfigActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_config);
 		
+		BiMap<Integer, String> map = wakeupChoices();
+		String[] spinnerArray = map.values().toArray(new String[0]);
 		
+		Spinner spinner = new Spinner(this);
+	    ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
+	        R.layout.activity_config, spinnerArray);
+	    spinner.setAdapter(spinnerArrayAdapter);
 	}
 
 	@Override
@@ -23,18 +34,22 @@ public class ConfigActivity extends Activity {
 		return true;
 	}
 	
-	public static TreeMap<Integer, String> wakeupChoices() {    
+	public static final ImmutableBiMap<Integer, String> wakeupChoices() {    
 		Integer intervals[] = {10, 15, 30, 60};
-	    TreeMap<Integer, String> map = new TreeMap<Integer,String>();
 
-	    map.put(0, "Never");
+	    ImmutableBiMap.Builder<Integer, String> builder = new ImmutableBiMap.Builder<Integer, String>();
+
+	    builder.put(0, "Never");
 	    
 	    for (Integer i : intervals) {
 	    	String s = "Every ";
 	    	s += i.toString();
 	    	s += " minutes";
-	    	map.put(i, s);
+	    	builder.put(i, s);
 	    }
+	    builder.build();
+	    
+	    final ImmutableBiMap<Integer, String> map = builder.build();
 
 	    return map;
 	}
