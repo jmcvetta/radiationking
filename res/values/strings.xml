@@ -8,5 +8,7 @@
     <string name="capital_enabled">ENABLED</string>
     <string name="capital_disabled">DISABLED</string>
     <string name="help_spinner_wakeup">When the device is idle, how often should Radiation King activate the radio to check for email etc?</string>
+    <string name="wakeup_interval_key">WAKEUP_INTERVAL_KEY</string>
+    <string name="wakeup_interval_default">0</string>
 
 </resources>

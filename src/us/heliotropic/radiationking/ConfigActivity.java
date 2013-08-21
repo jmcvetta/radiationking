@@ -1,6 +1,8 @@
 package us.heliotropic.radiationking;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
@@ -22,6 +24,15 @@ public class ConfigActivity extends Activity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, spinnerArray);
 		spinner.setAdapter(adapter);
+
+		Integer defaultWakeupInterval = getResources().getInteger(
+				R.string.wakeup_interval_default);
+		SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+		int wakeupInterval = prefs.getInt(
+				getString(R.string.wakeup_interval_key), defaultWakeupInterval);
+		String intervalString = map.get(wakeupInterval);
+		int spinnerPosition = adapter.getPosition(intervalString);
+		spinner.setSelection(spinnerPosition);
 	}
 
 	@Override
