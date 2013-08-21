@@ -1,7 +1,5 @@
 package us.heliotropic.radiationking;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,14 +15,13 @@ public class ConfigActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_config);
-		
+
 		BiMap<Integer, String> map = wakeupChoices();
 		String[] spinnerArray = map.values().toArray(new String[0]);
-		
-		Spinner spinner = new Spinner(this);
-	    ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
-	        R.layout.activity_config, spinnerArray);
-	    spinner.setAdapter(spinnerArrayAdapter);
+		Spinner spinner = (Spinner) findViewById(R.id.spinner_wakeup);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, spinnerArray);
+		spinner.setAdapter(adapter);
 	}
 
 	@Override
@@ -33,26 +30,25 @@ public class ConfigActivity extends Activity {
 		getMenuInflater().inflate(R.menu.config, menu);
 		return true;
 	}
-	
-	public static final ImmutableBiMap<Integer, String> wakeupChoices() {    
-		Integer intervals[] = {10, 15, 30, 60};
 
-	    ImmutableBiMap.Builder<Integer, String> builder = new ImmutableBiMap.Builder<Integer, String>();
+	public static final ImmutableBiMap<Integer, String> wakeupChoices() {
+		Integer intervals[] = { 10, 15, 30, 60 };
 
-	    builder.put(0, "Never");
-	    
-	    for (Integer i : intervals) {
-	    	String s = "Every ";
-	    	s += i.toString();
-	    	s += " minutes";
-	    	builder.put(i, s);
-	    }
-	    builder.build();
-	    
-	    final ImmutableBiMap<Integer, String> map = builder.build();
+		ImmutableBiMap.Builder<Integer, String> builder = new ImmutableBiMap.Builder<Integer, String>();
 
-	    return map;
+		builder.put(0, "Never");
+
+		for (Integer i : intervals) {
+			String s = "Every ";
+			s += i.toString();
+			s += " minutes";
+			builder.put(i, s);
+		}
+		builder.build();
+
+		final ImmutableBiMap<Integer, String> map = builder.build();
+
+		return map;
 	}
-
 
 }
