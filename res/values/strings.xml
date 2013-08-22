@@ -12,5 +12,7 @@
     <string name="prefs_enabled_key">PREFS_ENABLED_KEY</string>
     <string name="toast_set_wakeup_interval">Set wakeup interval to %s</string>
     <string name="toast_toggle_enabled">Radiation King is %s</string>
+    <string name="never">Never</string>
+    <string name="wakeup_interval_minutes">Every %d minutes</string>
 
 </resources>

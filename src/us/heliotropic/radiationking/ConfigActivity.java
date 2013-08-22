@@ -59,18 +59,16 @@ public class ConfigActivity extends Activity implements OnItemSelectedListener {
 		return true;
 	}
 
-	public static final ImmutableBiMap<Integer, String> wakeupChoices() {
+	public final ImmutableBiMap<Integer, String> wakeupChoices() {
 		Integer intervals[] = { 10, 15, 30, 60 };
 
 		ImmutableBiMap.Builder<Integer, String> builder = new ImmutableBiMap.Builder<Integer, String>();
 
-		builder.put(0, "Never");
+		builder.put(0, getString(R.string.never));
 
+		String template = getString(R.string.wakeup_interval_minutes);
 		for (Integer i : intervals) {
-			String s = "Every ";
-			s += i.toString();
-			s += " minutes";
-			builder.put(i, s);
+			builder.put(i, String.format(template, i));
 		}
 		builder.build();
 
@@ -121,8 +119,7 @@ public class ConfigActivity extends Activity implements OnItemSelectedListener {
 	}
 
 	public void onNothingSelected(AdapterView<?> parent) {
-		// Another interface callback
-		// Toast.makeText(this, "NOTHING", Toast.LENGTH_LONG).show();
+		// Do nothing (?)
 	}
 
 }
