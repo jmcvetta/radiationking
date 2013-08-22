@@ -37,14 +37,16 @@ public class ConfigActivity extends Activity implements OnItemSelectedListener {
 		//
 		SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
 		// Enabled Toggle
-		Boolean enabled = prefs.getBoolean(getString(R.string.prefs_enabled_key), false);
+		Boolean enabled = prefs.getBoolean(
+				getString(R.string.prefs_enabled_key), false);
 		ToggleButton button = (ToggleButton) findViewById(R.id.toggle_enabled);
 		button.setChecked(enabled);
 		// Wakeup Interval Spinner
 		Integer defaultWakeupInterval = getResources().getInteger(
 				R.integer.wakeup_interval_default);
 		Integer wakeupInterval = prefs.getInt(
-				getString(R.string.prefs_wakeup_interval_key), defaultWakeupInterval);
+				getString(R.string.prefs_wakeup_interval_key),
+				defaultWakeupInterval);
 		String intervalString = map.get(wakeupInterval);
 		Integer spinnerPosition = adapter.getPosition(intervalString);
 		spinner.setSelection(spinnerPosition);
@@ -76,28 +78,43 @@ public class ConfigActivity extends Activity implements OnItemSelectedListener {
 
 		return map;
 	}
-	
-	public void onItemSelected(AdapterView<?> parent, View view, 
-            int pos, long id) {
+
+	public void onToggleClicked(View view) {
 		SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
-		Integer origInterval = prefs.getInt(
-				getString(R.string.prefs_wakeup_interval_key), getResources().getInteger(
-				R.integer.wakeup_interval_default));
-        String selected = (String) parent.getItemAtPosition(pos);
+		String prefs_key = getString(R.string.prefs_enabled_key);
+		Boolean origEnabled = prefs.getBoolean(prefs_key, false);
+		boolean enabled = ((ToggleButton) view).isChecked();
+		editor.putBoolean(prefs_key, enabled);
+		editor.commit();
+		if (enabled != origEnabled) {
+			String message = "Radiation king is ";
+			Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+		}
+	}
+
+	public void onItemSelected(AdapterView<?> parent, View view, int pos,
+			long id) {
+		SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		String prefs_key = getString(R.string.prefs_wakeup_interval_key);
+		Integer origInterval = prefs.getInt(prefs_key, getResources()
+				.getInteger(R.integer.wakeup_interval_default));
+		String selected = (String) parent.getItemAtPosition(pos);
 		Integer interval = wakeupChoices().inverse().get(selected);
-		editor.putInt(getString(R.string.prefs_wakeup_interval_key), interval);
+		editor.putInt(prefs_key, interval);
 		editor.commit();
 		if (interval != origInterval) {
-			String message = "Set wakeup interval to " + selected;
+			String message = getString(R.string.toast_set_wakeup_interval)
+					+ selected;
 			Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 		}
-    }
+	}
 
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-        // Toast.makeText(this, "NOTHING", Toast.LENGTH_LONG).show();
-    }
-
+	public void onNothingSelected(AdapterView<?> parent) {
+		// Another interface callback
+		// Toast.makeText(this, "NOTHING", Toast.LENGTH_LONG).show();
+	}
 
 }

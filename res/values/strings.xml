@@ -10,5 +10,6 @@
     <string name="help_spinner_wakeup">When the device is idle, how often should Radiation King activate the radio to check for email etc?</string>
     <string name="prefs_wakeup_interval_key">PREFS_WAKEUP_INTERVAL_KEY</string>
     <string name="prefs_enabled_key">PREFS_ENABLED_KEY</string>
+    <string name="toast_set_wakeup_interval">Set wakeup interval to </string>
 
 </resources>
