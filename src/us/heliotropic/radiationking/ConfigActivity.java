@@ -88,7 +88,15 @@ public class ConfigActivity extends Activity implements OnItemSelectedListener {
 		editor.putBoolean(prefs_key, enabled);
 		editor.commit();
 		if (enabled != origEnabled) {
-			String message = "Radiation king is ";
+			String template = getString(R.string.toast_toggle_enabled);
+			String message;
+			if (enabled) {
+				message = String.format(template,
+						getString(R.string.capital_enabled));
+			} else {
+				message = String.format(template,
+						getString(R.string.capital_disabled));
+			}
 			Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
 		}
@@ -106,8 +114,8 @@ public class ConfigActivity extends Activity implements OnItemSelectedListener {
 		editor.putInt(prefs_key, interval);
 		editor.commit();
 		if (interval != origInterval) {
-			String message = getString(R.string.toast_set_wakeup_interval)
-					+ selected;
+			String message = String.format(
+					getString(R.string.toast_set_wakeup_interval), selected);
 			Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 		}
 	}

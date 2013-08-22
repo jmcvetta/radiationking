@@ -32,6 +32,7 @@
         android:layout_below="@+id/help_toggle_enabled"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:onClick="onToggleClicked"
         android:textOff="@string/capital_disabled"
         android:textOn="@string/capital_enabled" />
 
