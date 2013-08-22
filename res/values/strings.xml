@@ -14,5 +14,6 @@
     <string name="toast_toggle_enabled">Radiation King is %s</string>
     <string name="never">Never</string>
     <string name="wakeup_interval_minutes">Every %d minutes</string>
+    <string name="prefs_file">RadiationKingPrefs</string>
 
 </resources>

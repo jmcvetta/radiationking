@@ -35,7 +35,8 @@ public class ConfigActivity extends Activity implements OnItemSelectedListener {
 		//
 		// Load preferences
 		//
-		SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences prefs = this.getSharedPreferences(
+				getString(R.string.prefs_file), Context.MODE_PRIVATE);
 		// Enabled Toggle
 		Boolean enabled = prefs.getBoolean(
 				getString(R.string.prefs_enabled_key), false);
@@ -78,7 +79,8 @@ public class ConfigActivity extends Activity implements OnItemSelectedListener {
 	}
 
 	public void onToggleClicked(View view) {
-		SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences prefs = this.getSharedPreferences(
+				getString(R.string.prefs_file), Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
 		String prefs_key = getString(R.string.prefs_enabled_key);
 		Boolean origEnabled = prefs.getBoolean(prefs_key, false);
@@ -102,7 +104,8 @@ public class ConfigActivity extends Activity implements OnItemSelectedListener {
 
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {
-		SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences prefs = this.getSharedPreferences(
+				getString(R.string.prefs_file), Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
 		String prefs_key = getString(R.string.prefs_wakeup_interval_key);
 		Integer origInterval = prefs.getInt(prefs_key, getResources()
